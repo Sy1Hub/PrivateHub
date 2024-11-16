@@ -3,7 +3,7 @@ if not player then
 	return
 end
 
-print(player.UserId)
+print("RanScript")
 
 local Whitelist = {465304313, 87654321}
 
