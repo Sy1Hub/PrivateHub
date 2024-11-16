@@ -3,6 +3,8 @@ if not player then
 	return
 end
 
+print(player.UserId)
+
 local Whitelist = {465304313, 87654321}
 
 local WhitelistLookup = {}
