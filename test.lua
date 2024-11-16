@@ -3,7 +3,7 @@ if not player then
 	return
 end
 
-local Whitelist = {12345678, 87654321}
+local Whitelist = {465304313, 87654321}
 
 local WhitelistLookup = {}
 for _, userId in ipairs(Whitelist) do
