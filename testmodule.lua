@@ -1,13 +1,13 @@
 local MainModule = {}
 
-function CreateUI()
+function MainModule.CreateUI()
 	local ScreenGui = Instance.new("ScreenGui")
 	ScreenGui.Name = game:GetService("HttpService"):GenerateGUID(false)
 	ScreenGui.Parent = game:GetService("CoreGui")
 	return ScreenGui
 end
 
-function CreateFrame(Name, parent, Size:Vector2, Position:Vector2, BackgroundColor:Color3, Transparency:number)
+function MainModule.CreateFrame(Name, parent, Size:Vector2, Position:Vector2, BackgroundColor:Color3, Transparency:number)
 	local Frame = Instance.new("Frame")
 	Frame.Name = Name
 	Frame.Size = UDim2.new(0, Size.X, 0, Size.Y)
@@ -18,14 +18,14 @@ function CreateFrame(Name, parent, Size:Vector2, Position:Vector2, BackgroundCol
 	return Frame
 end
 
-function CreateUICorner(parent, CornerRadius)
+function MainModule.CreateUICorner(parent, CornerRadius)
 	local UICorner = Instance.new("UICorner")
 	UICorner.CornerRadius = CornerRadius
 	UICorner.Parent = parent
 	return UICorner
 end
 
-function CreateUIGradient(parent, Color, Offset, Rotation, Transparency)
+function MainModule.CreateUIGradient(parent, Color, Offset, Rotation, Transparency)
 	local UIGradient = Instance.new("UIGradient")
 	UIGradient.Color = Color
 	UIGradient.Offset = Offset
@@ -35,7 +35,7 @@ function CreateUIGradient(parent, Color, Offset, Rotation, Transparency)
 	return UIGradient
 end
 
-function CreateUIStroke(parent, Color, Thickness, Transparency)
+function MainModule.CreateUIStroke(parent, Color, Thickness, Transparency)
 	local UIStroke = Instance.new("UIStroke")
 	UIStroke.Color = Color
 	UIStroke.Thickness = Thickness
@@ -44,7 +44,7 @@ function CreateUIStroke(parent, Color, Thickness, Transparency)
 	return UIStroke
 end
 
-function CreateTextLabel(parent, BackgroundColor:Color3, Text, TextColor:Color3, TextSize, Font, TextTransparency)
+function MainModule.CreateTextLabel(parent, BackgroundColor:Color3, Text, TextColor:Color3, TextSize, Font, TextTransparency)
 	local TextLabel = Instance.new("TextLabel")
 	TextLabel.BackgroundColor3 = BackgroundColor
 	TextLabel.Text = Text
@@ -56,7 +56,7 @@ function CreateTextLabel(parent, BackgroundColor:Color3, Text, TextColor:Color3,
 	return TextLabel
 end
 
-function CreateTextButton(parent, BackgroundColor:Color3, Text, TextColor:Color3, TextSize, Font, TextTransparency, Callback)
+function MainModule.CreateTextButton(parent, BackgroundColor:Color3, Text, TextColor:Color3, TextSize, Font, TextTransparency, Callback)
 	local TextButton = Instance.new("TextButton")
 	TextButton.BackgroundColor3 = BackgroundColor
 	TextButton.Text = Text
@@ -71,8 +71,7 @@ function CreateTextButton(parent, BackgroundColor:Color3, Text, TextColor:Color3
 	return TextButton
 end
 
--- Creates a TextBox with placeholder text and a callback when focus is lost.
-function CreateTextBox(parent, BackgroundColor:Color3, PlaceholderTxt, Text, TextColor:Color3, TextSize, Font, TextTransparency, Callback)
+function MainModule.CreateTextBox(parent, BackgroundColor:Color3, PlaceholderTxt, Text, TextColor:Color3, TextSize, Font, TextTransparency, Callback)
 	local TextBox = Instance.new("TextBox")
 	TextBox.Parent = parent
 	TextBox.BackgroundColor3 = BackgroundColor
@@ -82,7 +81,6 @@ function CreateTextBox(parent, BackgroundColor:Color3, PlaceholderTxt, Text, Tex
 	TextBox.TextSize = TextSize
 	TextBox.Font = Font
 	TextBox.TextTransparency = TextTransparency
-	-- Trigger callback when focus is lost and if Enter was pressed
 	TextBox.FocusLost:Connect(function(enterPressed)
 		if enterPressed and Callback then
 			Callback(TextBox.Text)
@@ -91,8 +89,7 @@ function CreateTextBox(parent, BackgroundColor:Color3, PlaceholderTxt, Text, Tex
 	return TextBox
 end
 
--- Creates a checkbox using a TextButton and a checkmark. The callback passes the new state (true/false).
-function CreateCheckbox(parent, Size:Vector2, Position:Vector2, BackgroundColor:Color3, CheckColor:Color3, Callback)
+function MainModule.CreateCheckbox(parent, Size:Vector2, Position:Vector2, BackgroundColor:Color3, CheckColor:Color3, Callback)
 	local Checkbox = Instance.new("TextButton")
 	Checkbox.Size = UDim2.new(0, Size.X, 0, Size.Y)
 	Checkbox.Position = UDim2.new(0, Position.X, 0, Position.Y)
@@ -100,7 +97,6 @@ function CreateCheckbox(parent, Size:Vector2, Position:Vector2, BackgroundColor:
 	Checkbox.Text = ""
 	Checkbox.Parent = parent
 
-	-- Create a checkmark label inside the checkbox
 	local CheckMark = Instance.new("TextLabel")
 	CheckMark.Size = UDim2.new(1, 0, 1, 0)
 	CheckMark.BackgroundTransparency = 1
@@ -120,7 +116,7 @@ function CreateCheckbox(parent, Size:Vector2, Position:Vector2, BackgroundColor:
 	return Checkbox
 end
 
-function CreateSlider(parent, Size:Vector2, Position:Vector2, BackgroundColor:Color3, FillColor:Color3, TextColor:Color3, min:number, max:number, initValue:number, showAsPercent:boolean, Callback)
+function MainModule.CreateSlider(parent, Size:Vector2, Position:Vector2, BackgroundColor:Color3, FillColor:Color3, TextColor:Color3, min:number, max:number, initValue:number, showAsPercent:boolean, Callback)
 	local Slider = Instance.new("Frame")
 	Slider.Size = UDim2.new(0, Size.X, 0, Size.Y)
 	Slider.Position = UDim2.new(0, Position.X, 0, Position.Y)
@@ -173,7 +169,6 @@ function CreateSlider(parent, Size:Vector2, Position:Vector2, BackgroundColor:Co
 		end
 	end
 
-	-- Set initial slider state
 	local initialPercent = valueToPercent(initValue)
 	Fill.Size = UDim2.new(initialPercent, 0, 1, 0)
 	if showAsPercent then
